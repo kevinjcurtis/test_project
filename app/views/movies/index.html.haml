@@ -1,0 +1,35 @@
+%h1 All Movies
+
+%table#movies
+    %thead 
+    %tr
+        %th Movie Title
+        %th Rating
+        %th Release Date
+        %th More Info
+    %tbody
+        - @movies.each do |movie|
+            %tr
+                %td= movie.title
+                %td= movie.rating
+                %td= movie.release_date
+                %td= link_to "More about #{movie.title}", movie_path(movie)
+= link_to 'Add new movie', new_movie_path
+%h1 Download:
+%div 
+= link_to 'CSV File', movies_path(format: 'csv')
+%div
+= link_to 'Excel File', movies_path(format: 'xls')
+
+%h1 Import:
+= form_tag import_movies_path, multipart: true do
+    = submit_tag 'Import'
+    = file_field_tag :file
+
+%h1 Search TMDb for a movie
+
+= form_tag :action => 'search_tmdb' do
+
+    %label{:for => 'search_terms'} Search Terms
+    = text_field_tag 'search_terms'
+    = submit_tag 'Search TMDb'
