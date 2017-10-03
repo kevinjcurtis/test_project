@@ -11,9 +11,9 @@ class Movie < ActiveRecord::Base
           end
       end
   end
-  def self.import(file)
-      CSV.foreach(file.path, headers:true ) do |row|
-          Movie.create! row.to_hash
-      end
-  end
+    def self.import(file)
+        CSV.foreach(file.path, headers:true ) do |row|
+            Movie.create! row.to_hash
+        end 
+    end
 end

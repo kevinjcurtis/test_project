@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'roo'
 gem 'haml'
 gem 'themoviedb'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -54,4 +55,5 @@ gem 'capybara'         # lets Cucumber pretend to be a web browser
 gem 'launchy'  # a useful debugging aid for user stories
 gem 'rspec-rails'
 gem 'guard-rspec'
+
 end
