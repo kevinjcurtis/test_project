@@ -8,17 +8,22 @@ class MoviesController < ApplicationController
         @movies = Movie.all
         respond_to do |format|
             format.html
-            format.csv {render text: @movies.to_csv}
+            format.csv {render text: @movies.to_csv, nil:ignore}
             format.xls { send_data @movies.to_csv(col_sep: "\t") }
         end
     end
     
     def import
-        Movie.import(params[:file])
-        flash[:notice] = "Data imported"
-        redirect_to movies_path notice: "Data Imported."
+            if params[:file].nil?
+                flash[:warning] = "Please Select a File"
+                redirect_to movies_path notice: "Not Imported."
+            else
+                Movie.import(params[:file])
+                flash[:notice] = "Data imported"
+                redirect_to movies_path notice: "Data Imported."
+            end
     end
-   
+
     def show
         id = params[:id] # retrieve movie ID from URI route
         @movie = Movie.find(id) # look up movie by unique ID
